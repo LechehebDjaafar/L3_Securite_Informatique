@@ -25,7 +25,7 @@ def encrypt_vigenere(text,key,list_alphabet=list_alphabet,encrypt_text="",i=0):
     for car in text:
         position_car_in_text=reuter_number_position_Alphabet(car)
         position_car_in_Key=reuter_number_position_Alphabet(key[i])
-        number_sign = position_car_in_text-position_car_in_Key
+        number_sign = position_car_in_text+position_car_in_Key
         encrypt_text+=reuter_number_position_Alphabet(number_sign)
         if (len(key)-1) == i:
             i=0
@@ -35,21 +35,21 @@ def encrypt_vigenere(text,key,list_alphabet=list_alphabet,encrypt_text="",i=0):
 
 
 #Create a text decryption function with decryption vigenère
-def decrypt_vigenere(text,key,list_alphabet=list_alphabet,encrypt_text="",i=0):
+def decrypt_vigenere(text,key,list_alphabet=list_alphabet,decrypt_text="",i=0):
     for car in text:
         position_car_in_text=reuter_number_position_Alphabet(car)
         position_car_in_Key=reuter_number_position_Alphabet(key[i])
         number_sign = position_car_in_text-position_car_in_Key
-        encrypt_text+=reuter_number_position_Alphabet(number_sign)
+        decrypt_text+=reuter_number_position_Alphabet(number_sign)
         if (len(key)-1) == i:
             i=0
         else:
             i+=1
-    return encrypt_text
+    return decrypt_text
 
 
 #Create a function with get key in decryption vigenère
-def get_Key(encrypt_text="specialiteinformatique",decrypt_text="dxggvcptbgmahscucxvsyp",key=""):
+def get_encryption_key(encrypt_text,decrypt_text,key=""):
     for num_car in range(len(encrypt_text)):
         position_car_in_encrypt_text=reuter_number_position_Alphabet(encrypt_text[num_car])
         position_car_in_decrypt_text=reuter_number_position_Alphabet( decrypt_text[num_car])
@@ -57,4 +57,54 @@ def get_Key(encrypt_text="specialiteinformatique",decrypt_text="dxggvcptbgmahscu
         key+=reuter_number_position_Alphabet(number_sign)
     return key
 
+def main():
+    print("Welcome to Text Encryption System!")
+    print("=================================")
+    print("Options:")
+    print("1. Encrypt the text")
+    print("2. Decrypt the text")
+    print("3. Find the encryption key")
+    print("=================================")
 
+    valid_choice = False
+    while not valid_choice:
+        try:
+            choice = int(input("Enter your choice (1, 2, or 3): "))
+
+            if choice == 1:
+                encrypt_text()
+                valid_choice = True
+            elif choice == 2:
+                decrypt_text()
+                valid_choice = True
+            elif choice == 3:
+                find_encryption_key()
+                valid_choice = True
+            else:
+                print("Invalid choice. Please try again.")
+        except:
+            print("Invalid choice. Please try again.")
+
+
+
+def encrypt_text():
+    text = input("Enter the text you want to encrypt: ")
+    key = input("Enter the encryption key: ")
+    print("Encrypting the text...")
+    print(f"your text encrypted is: {encrypt_vigenere(text, key)}")
+
+
+def decrypt_text():
+    text = input("Enter the text you want to decrypt: ")
+    key = input("Enter the encryption key: ")
+    print("Decrypting the text...")
+    print(f"your text decrypted is: {decrypt_vigenere(text, key)}")
+
+def find_encryption_key():
+    unencrypted_text = input("Enter the unencrypted text: ")
+    encrypted_text = input("Enter the encrypted text: ")
+    print("Finding the encryption key...")
+    print(f" encryption key is : {get_encryption_key(unencrypted_text, encrypted_text)} ")
+    
+# Call the main function
+main()
