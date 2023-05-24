@@ -81,9 +81,9 @@ def main():
                 find_encryption_key()
                 valid_choice = True
             else:
-                print("\033[1;31mInvalid choice. Please try again.")
+                print("Invalid choice. Please try again.")
         except:
-            print("\033[1;31mInvalid choice. Please try again.")
+            print("Invalid choice. Please try again.")
 
 
 
